@@ -3,6 +3,7 @@ package com.petter.environment;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
+ * ConfigurationProperties注解可以用来配置自定义配置文件
  * @author Administrator
  * @since 2017-02-12 22:01
  */
@@ -10,7 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class MongoProperties {
     private String host;
     private int port;
-    private String uri = "mongodb://localhost/test";  //如果不配置则为默认值
+    private String uri = "mongodb://localhost/test";  //如果不配置则此为默认值
     private String database;
 
     public String getHost() {

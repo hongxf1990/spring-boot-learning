@@ -30,7 +30,7 @@ public class GlobalDefaultExceptionHandler {
         *
         */
        //所有的异常这里都会处理，后台不会再报错
-       //e.printStackTrace();
+       e.printStackTrace();
        System.out.println("这里进行了异常处理");
     }
 }
