@@ -60,12 +60,30 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-freemarker</artifactId>
 		</dependency>-->
+		<!-- config -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
-	</dependencies>
+		<!-- redis -->
+        <!--
+           包含支持UI模版（Velocity，FreeMarker，JasperReports），
+           邮件服务，
+           脚本服务(JRuby)，
+           缓存Cache（EHCache），
+           任务计划Scheduling（uartz）。
+        -->
+        <!--<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+    </dependencies>
 
 	<build>
 		<plugins>

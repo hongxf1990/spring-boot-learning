@@ -1,6 +1,6 @@
 package com.petter;
 
-import com.petter.service.DemoService;
+import com.petter.service.impl.DemoServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 public class BootLearningApplicationTests {
 
 	@Resource
-	private DemoService demoService;
+	private DemoServiceImpl demoService;
 
 	@Test
 	public void testGetName(){

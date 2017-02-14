@@ -1,6 +1,11 @@
 package com.petter.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * @author Administrator
@@ -8,7 +13,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "demo")
-public class Demo {
+public class Demo implements Serializable {
 
     @Id
     //@GenericGenerator(name = "test", strategy = "uuid")
@@ -33,5 +38,13 @@ public class Demo {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Demo{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

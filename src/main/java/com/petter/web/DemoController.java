@@ -1,7 +1,7 @@
 package com.petter.web;
 
 import com.petter.entity.Demo;
-import com.petter.service.DemoService;
+import com.petter.service.IDemoService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 public class DemoController {
 
     @Resource
-    private DemoService demoService;
+    private IDemoService demoService;
 
     /**
      * 测试保存数据方法.
@@ -26,7 +26,7 @@ public class DemoController {
     @RequestMapping("/save")
     public String save(){
         Demo d = new Demo();
-        d.setName("Angel");
+        d.setName("hongxf");
         demoService.save(d);//保存数据.
         return "ok.DemoController.save";
     }
@@ -36,5 +36,28 @@ public class DemoController {
             @PathVariable long id
     ){
         return demoService.getById(id);
+    }
+
+    @RequestMapping("/test1")
+    public String test1() {
+        demoService.test();
+        return "ok";
+    }
+
+    @RequestMapping("/test")
+    public Demo test(){
+        Demo loaded = demoService.getById(1L);
+        System.out.println("loaded="+loaded);
+        Demo cached = demoService.getById(1L);
+        System.out.println("cached="+cached);
+        loaded = demoService.getById(2L);
+        System.out.println("loaded2="+loaded);
+        return loaded;
+    }
+
+    @RequestMapping("/delete")
+    public String delete(long id){
+        demoService.deleteFromCache(id);
+        return "ok";
     }
 }
