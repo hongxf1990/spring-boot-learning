@@ -6,10 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
@@ -30,8 +28,8 @@ import redis.clients.jedis.JedisPoolConfig;
  * @author hongxf
  * @since 2017-02-14 9:32
  */
-@Configuration
-@EnableCaching //启用缓存，这个注解很重要；
+//@Configuration
+//@EnableCaching //启用缓存，这个注解很重要；
 public class RedisCacheConfig extends CachingConfigurerSupport {
 
     @Bean

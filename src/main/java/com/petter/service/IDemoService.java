@@ -12,7 +12,11 @@ public interface IDemoService {
 
     Demo getById(Long id);
 
+    Demo findById(Long id);
+
     void deleteFromCache(Long id);
+
+    void deleteFromEhCache(Long id);
 
     void test();
 }

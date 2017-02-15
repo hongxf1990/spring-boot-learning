@@ -27,6 +27,11 @@ public class DemoServiceImpl implements IDemoService {
     @Resource
     private RedisTemplate<String, String> redisTemplate;
 
+    /**
+     * value属性表示使用哪个缓存策略，缓存策略在ehcache.xml
+     */
+    private static final String DEMO_CACHE_NAME = "demo";
+
     @Override
     @Transactional
     public void save(Demo demo) {
@@ -41,9 +46,23 @@ public class DemoServiceImpl implements IDemoService {
         //return demoDao.getById(id);
     }
 
+    @Cacheable(value = DEMO_CACHE_NAME, key = "'demo_' + #id")
+    @Override
+    public Demo findById(Long id) {
+        System.out.println("findById() ==== 从数据库中进行获取的。。。id= " + id);
+        return demoRepository.findOne(id);
+        //return demoDao.getById(id);
+    }
+
     @CacheEvict(value = "demo")
     @Override
     public void deleteFromCache(Long id) {
+        System.out.println("demo从缓存中删除.");
+    }
+
+    @CacheEvict(value = DEMO_CACHE_NAME, key = "'demo_' + #id")
+    @Override
+    public void deleteFromEhCache(Long id) {
         System.out.println("demo从缓存中删除.");
     }
 

@@ -47,17 +47,34 @@ public class DemoController {
     @RequestMapping("/test")
     public Demo test(){
         Demo loaded = demoService.getById(1L);
-        System.out.println("loaded="+loaded);
+        System.out.println("loaded ="+loaded);
         Demo cached = demoService.getById(1L);
-        System.out.println("cached="+cached);
+        System.out.println("cached ="+cached);
         loaded = demoService.getById(2L);
-        System.out.println("loaded2="+loaded);
+        System.out.println("loaded2 ="+loaded);
+        return loaded;
+    }
+
+    @RequestMapping("/test-ehcache")
+    public Demo testEhcache(){
+        Demo loaded = demoService.findById(1L);
+        System.out.println("loaded= "+loaded);
+        Demo cached = demoService.findById(1L);
+        System.out.println("cached= "+cached);
+        loaded = demoService.findById(2L);
+        System.out.println("loaded2= "+loaded);
         return loaded;
     }
 
     @RequestMapping("/delete")
     public String delete(long id){
         demoService.deleteFromCache(id);
+        return "ok";
+    }
+
+    @RequestMapping("/delete-ehcache")
+    public String deleteFromEhcache(long id){
+        demoService.deleteFromEhCache(id);
         return "ok";
     }
 }
