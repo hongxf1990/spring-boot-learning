@@ -33,7 +33,7 @@ public class DemoServiceImpl implements IDemoService {
         demoRepository.save(demo);
     }
 
-    @Cacheable(value = "demo", keyGenerator = "keyGenerator")
+    @Cacheable(value = "demo")
     @Override
     public Demo getById(Long id) {
         System.out.println("getById() ==== 从数据库中进行获取的。。。id= " + id);

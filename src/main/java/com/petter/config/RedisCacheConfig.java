@@ -3,6 +3,7 @@ package com.petter.config;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -11,9 +12,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
+import redis.clients.jedis.JedisPoolConfig;
 
 /**
  * redis 缓存配置;
@@ -29,6 +33,26 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 @Configuration
 @EnableCaching //启用缓存，这个注解很重要；
 public class RedisCacheConfig extends CachingConfigurerSupport {
+
+    @Bean
+    public JedisConnectionFactory redisConnectionFactory(
+            @Value("${spring.redis.host}") String host,
+            @Value("${spring.redis.port}") int port,
+            @Value("${spring.redis.pool.max-idle}") int maxIdle,
+            @Value("${spring.redis.pool.min-idle}") int minIdle,
+            @Value("${spring.redis.pool.max-wait}") int maxWait
+    ) {
+        JedisConnectionFactory redisConnectionFactory = new JedisConnectionFactory();
+        // Defaults
+        redisConnectionFactory.setHostName(host);
+        redisConnectionFactory.setPort(port);
+        JedisPoolConfig config = new JedisPoolConfig();
+        config.setMaxIdle(maxIdle);
+        config.setMinIdle(minIdle);
+        config.setMaxWaitMillis(maxWait);
+        redisConnectionFactory.setPoolConfig(config);
+        return redisConnectionFactory;
+    }
     /**
      * 缓存管理器.
      * @param redisTemplate
@@ -62,34 +86,28 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
         //spring-data-redis默认会对key 和 value 进行序列化，因为redis的client和server进行交互时协议要求的是byte
         //采用spring操作redis是在jedis客户端基础上进行的，而jedis客户端与redis交互的时候协议中定义是用byte类型交互
         //所以为了解决key加入\xac\xed\x00\x05t\x00的问题，加入以下序列化定义
-        //RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
-        //redisTemplate.setConnectionFactory(factory);
-        //RedisSerializer<String> redisSerializer = new StringRedisSerializer();
-        //redisTemplate.setKeySerializer(redisSerializer);
-        //redisTemplate.setValueSerializer(redisSerializer);
-        //redisTemplate.setHashKeySerializer(redisSerializer);
-        //redisTemplate.setHashValueSerializer(redisSerializer);
-        //return redisTemplate;
+        RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(factory);
+        //定义key的序列化方式
+        RedisSerializer<String> redisSerializer = new StringRedisSerializer();
+        redisTemplate.setKeySerializer(redisSerializer);
+        redisTemplate.setHashKeySerializer(redisSerializer);
         //定义value的序列化方式
-        StringRedisTemplate template = new StringRedisTemplate(factory);
-        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+        Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
         ObjectMapper om = new ObjectMapper();
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
         jackson2JsonRedisSerializer.setObjectMapper(om);
-
-        // template.setKeySerializer(redisSerializer);
-        template.setValueSerializer(jackson2JsonRedisSerializer);
-        template.setHashValueSerializer(jackson2JsonRedisSerializer);
-        template.afterPropertiesSet();
-        return template;
+        redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
+        redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
+        redisTemplate.afterPropertiesSet();
+        return redisTemplate;
     }
 
     /**
      * 自定义key.
      * 此方法将会根据类名+方法名+所有参数的值生成唯一的一个key,即使@Cacheable中的value属性一样，key也会不一样。
      */
-    @Bean
     @Override
     public KeyGenerator keyGenerator() {
         return (o, method, objects) -> {
