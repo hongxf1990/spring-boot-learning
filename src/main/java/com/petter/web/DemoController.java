@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author Administrator
@@ -76,5 +77,10 @@ public class DemoController {
     public String deleteFromEhcache(long id){
         demoService.deleteFromEhCache(id);
         return "ok";
+    }
+
+    @RequestMapping("/likeName")
+    public List<Demo> likeName(String name){
+        return demoService.likeName(name);
     }
 }

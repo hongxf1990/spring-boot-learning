@@ -4,6 +4,8 @@
     <logger name="org.springframework.web" level="INFO"/>
     <logger name="com.petter.web" level="TRACE" />
 
+    <logger name="com.petter.mapper" level="DEBUG"/>
+
     <springProfile name="dev">
         <logger name="com.petter.web" level="DEBUG" />
     </springProfile>

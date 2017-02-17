@@ -2,6 +2,7 @@ package com.petter.service.impl;
 
 import com.petter.dao.DemoDao;
 import com.petter.entity.Demo;
+import com.petter.mapper.DemoMapper;
 import com.petter.repository.DemoRepository;
 import com.petter.service.IDemoService;
 import org.springframework.cache.annotation.CacheEvict;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * @author Administrator
@@ -26,6 +28,8 @@ public class DemoServiceImpl implements IDemoService {
     private DemoDao demoDao;
     @Resource
     private RedisTemplate<String, String> redisTemplate;
+    @Resource
+    private DemoMapper demoMapper;
 
     /**
      * value属性表示使用哪个缓存策略，缓存策略在ehcache.xml
@@ -72,4 +76,11 @@ public class DemoServiceImpl implements IDemoService {
         valueOperations.set("redisCache", "random1=" + Math.random());
         System.out.println(valueOperations.get("redisCache"));
     }
+
+    @Override
+    public List<Demo> likeName(String name) {
+        return demoMapper.likeName("%" + name + "%");
+    }
+
+
 }
