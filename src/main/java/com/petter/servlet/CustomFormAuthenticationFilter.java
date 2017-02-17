@@ -24,15 +24,10 @@ public class CustomFormAuthenticationFilter extends FormAuthenticationFilter {
         // 取出页面的验证码
         // 输入的验证和session中的验证进行对比
         String randomCode = httpServletRequest.getParameter("randomCode");
-        if (randomCode == null) {
-            //如果验证码为空
-            httpServletRequest.setAttribute("shiroLoginFailure", "kaptchaValidateFailed");//自定义登录异常
-            // 拒绝访问，不再校验账号和密码
-            return true;
-        } else if (validateCode != null && !randomCode.equals(validateCode)) {
+        if (randomCode != null && validateCode != null && !randomCode.equals(validateCode)) {
             // 如果校验失败，将验证码错误失败信息，通过shiroLoginFailure设置到request中
             httpServletRequest.setAttribute("shiroLoginFailure", "kaptchaValidateFailed");//自定义登录异常
-            // 拒绝访问，不再校验账号和密码
+            //// 拒绝访问，不再校验账号和密码
             return true;
         }
 

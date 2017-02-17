@@ -5,6 +5,7 @@ import com.petter.environment.MongoProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 
@@ -17,6 +18,12 @@ public class PageController {
 
     @Resource
     private MongoProperties properties;
+
+    @RequestMapping("/hello")
+    @ResponseBody
+    public String hello() {
+        return "hello3";
+    }
 
     @RequestMapping("/hello-thymeleaf")
     public String helloHtml(
