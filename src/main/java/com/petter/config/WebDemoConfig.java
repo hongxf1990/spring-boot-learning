@@ -1,5 +1,8 @@
 package com.petter.config;
 
+import com.petter.servlet.ValidateCodeServlet;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -32,5 +35,10 @@ public class WebDemoConfig extends WebMvcConfigurerAdapter {
         //registry.addInterceptor(new MyInterceptor2()).addPathPatterns("/**");
         //registry.addInterceptor(new MyInterceptor1()).addPathPatterns("/**");
         super.addInterceptors(registry);
+    }
+
+    @Bean
+    public ServletRegistrationBean validateCodeServlet() {
+        return new ServletRegistrationBean(new ValidateCodeServlet(), "/validateCodeServlet");
     }
 }

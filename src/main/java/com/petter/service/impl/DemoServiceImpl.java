@@ -1,8 +1,8 @@
 package com.petter.service.impl;
 
 import com.petter.dao.DemoDao;
-import com.petter.dao.DemoRepository;
 import com.petter.entity.Demo;
+import com.petter.repository.DemoRepository;
 import com.petter.service.IDemoService;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
