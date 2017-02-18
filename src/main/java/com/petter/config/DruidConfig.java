@@ -1,4 +1,4 @@
-package com.petter.servlet;
+package com.petter.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
@@ -41,10 +41,10 @@ public class DruidConfig {
         return servletRegistrationBean;
     }
 
-    @Bean
-    public ServletRegistrationBean TestServlet() {
-        return new ServletRegistrationBean(new TestServlet(), "/test-servlet");
-    }
+    //@Bean
+    //public ServletRegistrationBean TestServlet() {
+    //    return new ServletRegistrationBean(new TestServlet(), "/test-servlet");
+    //}
 
     /**
      * 注册一个：filterRegistrationBean

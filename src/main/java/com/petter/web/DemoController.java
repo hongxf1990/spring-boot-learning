@@ -1,5 +1,6 @@
 package com.petter.web;
 
+import com.github.pagehelper.PageHelper;
 import com.petter.entity.Demo;
 import com.petter.service.IDemoService;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -81,6 +82,7 @@ public class DemoController {
 
     @RequestMapping("/likeName")
     public List<Demo> likeName(String name){
+        PageHelper.startPage(1, 2);
         return demoService.likeName(name);
     }
 }
