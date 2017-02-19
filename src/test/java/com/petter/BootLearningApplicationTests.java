@@ -24,4 +24,5 @@ public class BootLearningApplicationTests {
 	public void contextLoads() {
 	}
 
+
 }

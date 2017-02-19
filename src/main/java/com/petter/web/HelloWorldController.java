@@ -21,6 +21,14 @@ public class HelloWorldController {
         return "Hello world!";
     }
 
+    @RequestMapping("/hello2")
+    public String hello(
+            String name,
+            Integer state
+    ){
+        return "name "+name+";state "+state;
+    }
+
     @RequestMapping("/demo")
     public DemoBean getDemo() {
         DemoBean demoBean = new DemoBean();

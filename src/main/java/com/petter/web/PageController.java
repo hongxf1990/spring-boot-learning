@@ -42,4 +42,9 @@ public class PageController {
         demo.setName("hongxf2");
         return "hello";
     }
+
+    @RequestMapping("/email")
+    public String email() {
+        return "email";
+    }
 }

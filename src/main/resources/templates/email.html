@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+    <h3 th:text="'你好，' + ${username} + '，这是一封模板邮件!'">你好， 洪学飞，这是一封模板邮件!</h3>
+    <h3 th:text="|你好，${username}，这是一封模板邮件2!|">你好， 洪，这是一封模板邮件!</h3>
+</body>
+</html>
