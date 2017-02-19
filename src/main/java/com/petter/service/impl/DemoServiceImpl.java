@@ -74,7 +74,6 @@ public class DemoServiceImpl implements IDemoService {
     public void test() {
         ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
         valueOperations.set("redisCache", "random1=" + Math.random());
-        System.out.println(valueOperations.get("redisCache"));
     }
 
     @Override

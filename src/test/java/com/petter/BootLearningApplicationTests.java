@@ -16,13 +16,16 @@ public class BootLearningApplicationTests {
 	@Resource
 	private DemoServiceImpl demoService;
 
-	@Test
+	//@Test
 	public void testGetName(){
 		Assert.assertEquals("Angel", demoService.getById(1L).getName());
 	}
-	@Test
+	//@Test
 	public void contextLoads() {
 	}
 
-
+    @Test
+    public void test() {
+        System.out.println("test");
+    }
 }

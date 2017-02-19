@@ -1,24 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <!--<include resource="org/springframework/boot/logging/logback/base.xml" />
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
     <logger name="org.springframework.web" level="INFO"/>
-    <logger name="com.petter.web" level="TRACE" />
+    <!--<logger name="com.petter.web" level="INFO" />-->
 
-    <logger name="com.petter.mapper" level="DEBUG"/>
+    <!--<logger name="com.petter.mapper" level="DEBUG"/>-->
 
-    <springProfile name="dev">
-        <logger name="com.petter.web" level="DEBUG" />
+    <!-- 开发环境 + 测试环境. 多个使用逗号隔开. -->
+    <springProfile name="dev,test">
+        <logger name="org.springframework.web" level="INFO"/>
+        <logger name="com.petter.web" level="INFO" />
+        <logger name="com.petter.mapper" level="DEBUG" />
     </springProfile>
 
-    <springProfile name="staging">
-        <logger name="com.petter.web" level="INFO" />
-    </springProfile>-->
+    <!-- 生产环境. -->
+    <springProfile name="prod">
+        <logger name="org.springframework.web" level="ERROR"/>
+        <logger name="com.petter" level="ERROR" />
+    </springProfile>
 
+    <!-- 以下配置spring boot已经全部配置完毕 可查看org/springframework/boot/logging/logback下的配置文件
+        只需要在application.properties文件中配置
+        logging.file=./springboot.log
+        默认级别是info，要改级别的话还要在appliacation.properties里增加一行
+        logging.level.org.springframework.web=INFO
+        根据不同环境（prod:生产环境，test:测试环境，dev:开发环境）来定义不同的日志输出，
+        在 logback-spring.xml 中使用 springProfile 节点来定义
+    -->
     <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <!--<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-21thread] [%-5level] [%-36.36logger{36}:%-4.4line] - %msg%n</pattern>
-            <!--<charset>GBK</charset>--><!-- 此处设置字符集 -->
+            &lt;!&ndash;<charset>GBK</charset>&ndash;&gt;&lt;!&ndash; 此处设置字符集 &ndash;&gt;
         </encoder>
     </appender>
 
@@ -28,16 +41,16 @@
             <fileNamePattern>log/petter.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
-        <!--日志文件最大的大小-->
+        &lt;!&ndash;日志文件最大的大小&ndash;&gt;
         <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
             <maxFileSize>20MB</maxFileSize>
         </triggeringPolicy>
         <encoder>
-            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            &lt;!&ndash;格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符&ndash;&gt;
             <pattern>
                 [%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-21thread] [%-5level] [%-36.36logger{36}:%-4.4line] - %msg%n
             </pattern>
-            <!--<charset>GBK</charset> --><!-- 此处设置字符集 -->
+            &lt;!&ndash;<charset>GBK</charset> &ndash;&gt;&lt;!&ndash; 此处设置字符集 &ndash;&gt;
         </encoder>
     </appender>
 
@@ -49,5 +62,5 @@
     </logger>
     <logger name="com.petter.mapper" level="DEBUG">
         <appender-ref ref="base-log" />
-    </logger>
+    </logger>-->
 </configuration>

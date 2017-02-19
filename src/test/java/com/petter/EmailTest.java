@@ -31,7 +31,7 @@ public class EmailTest {
     @Resource
     private JavaMailSender mailSender;
 
-    @Test
+    //@Test
     public void sendSimpleEmail() {
         SimpleMailMessage message = new SimpleMailMessage();
 
@@ -48,7 +48,7 @@ public class EmailTest {
      * 测试发送附件.(这里发送图片.)
      * @throws MessagingException
      */
-    @Test
+    //@Test
     public void sendAttachmentsEmail() throws MessagingException {
         //这个是javax.mail.internet.MimeMessage下的，不要搞错了。
         MimeMessage mimeMessage =  mailSender.createMimeMessage();
@@ -76,7 +76,7 @@ public class EmailTest {
      * 邮件中使用静态资源.
      * @throws Exception
      */
-    @Test
+    //@Test
     public void sendInlineMail() throws Exception {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
 
@@ -101,7 +101,7 @@ public class EmailTest {
      * 模板邮件；
      * @throws Exception
      */
-    @Test
+    //@Test
     public void sendTemplateMail() throws Exception {
 
         MimeMessage mimeMessage = mailSender.createMimeMessage();
@@ -127,5 +127,10 @@ public class EmailTest {
         helper.setText(html, true);
 
         mailSender.send(mimeMessage);
+    }
+
+    @Test
+    public void test() {
+        System.out.println("test");
     }
 }

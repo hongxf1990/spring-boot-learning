@@ -3,6 +3,8 @@ package com.petter.web;
 import com.github.pagehelper.PageHelper;
 import com.petter.entity.Demo;
 import com.petter.service.IDemoService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +19,8 @@ import java.util.List;
 @RequestMapping(value = "/demo")
 @RestController
 public class DemoController {
+
+    private Logger logger = LoggerFactory.getLogger(DemoController.class);
 
     @Resource
     private IDemoService demoService;
@@ -37,6 +41,7 @@ public class DemoController {
     public Demo getById(
             @PathVariable long id
     ){
+        logger.info("使用spring boot自带的配置，info");
         return demoService.getById(id);
     }
 
