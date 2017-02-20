@@ -3,12 +3,13 @@ package com.petter.config;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
-import org.springframework.beans.factory.annotation.Value;
+import com.petter.properties.DatabaseProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
@@ -19,6 +20,9 @@ import java.sql.SQLException;
  */
 @Configuration
 public class DruidConfig {
+
+    @Resource
+    private DatabaseProperties databaseProperties;
     /**
      * 注册一个StatViewServlet
      * @return
@@ -69,34 +73,17 @@ public class DruidConfig {
      * 在application.properties配置的方式是比较好，如果有特殊需求的话，也可以在这里进行注入
      * 如果同时进行了编程式的注入和配置的注入，配置的就无效了。
      * 如果采用第三方数据源需要把各个参数配置进来，必须采用这种方式
-     * @param driver
-     * @param url
-     * @param username
-     * @param password
-     * @param maxActive
      * @return
      */
     @Bean
-    public DataSource druidDataSource(
-            @Value("${spring.datasource.driver-class-name}") String driver,
-            @Value("${spring.datasource.url}") String url,
-            @Value("${spring.datasource.username}") String username,
-            @Value("${spring.datasource.password}") String password,
-            @Value("${spring.datasource.initialSize}") int initialSize,
-            @Value("${spring.datasource.maxActive}") int maxActive
-
-    ) {
+    public DataSource druidDataSource() {
         DruidDataSource druidDataSource = new DruidDataSource();
-        druidDataSource.setDriverClassName(driver);
-        druidDataSource.setUrl(url);
-        druidDataSource.setUsername(username);
-        druidDataSource.setPassword(password);
-        druidDataSource.setInitialSize(initialSize);
-        druidDataSource.setMaxActive(maxActive);
-        System.out.println("DruidConfiguration.druidDataSource(),url=" + url
-                + ",username=" + username
-                + ",password=" + password
-                + ",maxActive=" + maxActive);
+        druidDataSource.setDriverClassName(databaseProperties.getDriverClassName());
+        druidDataSource.setUrl(databaseProperties.getUrl());
+        druidDataSource.setUsername(databaseProperties.getUsername());
+        druidDataSource.setPassword(databaseProperties.getPassword());
+        druidDataSource.setInitialSize(databaseProperties.getInitialSize());
+        druidDataSource.setMaxActive(databaseProperties.getMaxActive());
 
         try {
             druidDataSource.setFilters("stat, wall");

@@ -1,7 +1,7 @@
 package com.petter.web;
 
 import com.petter.entity.Demo;
-import com.petter.environment.MongoProperties;
+import com.petter.properties.MongoProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;

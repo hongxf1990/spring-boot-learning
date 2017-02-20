@@ -1,9 +1,11 @@
-package com.petter.environment;
+package com.petter.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * ConfigurationProperties注解可以用来配置自定义配置文件
+ * 因为没有使用@Component注解，使用的类需要配置@EnableConfigurationProperties({MongoProperties.class})
+ *
  * @author Administrator
  * @since 2017-02-12 22:01
  */
