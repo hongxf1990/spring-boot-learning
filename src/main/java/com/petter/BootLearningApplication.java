@@ -5,11 +5,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 import javax.servlet.MultipartConfigElement;
 
 @SpringBootApplication
 //@ServletComponentScan
+@EnableAsync
 @MapperScan(value = "com.petter.mapper") //扫描mybatis的接口
 public class BootLearningApplication {
 
