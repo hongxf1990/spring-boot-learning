@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+    <!-- 这里的配置解决tomcat中运行时控制台输出乱码问题，如果采用main函数运行则放开下面注释注释到root标签（包括） -->
+    <!--<include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <include resource="org/springframework/boot/logging/logback/file-appender.xml" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>GBK</charset>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+    </root>-->
+
     <include resource="org/springframework/boot/logging/logback/base.xml" />
     <logger name="org.springframework.web" level="INFO"/>
-    <!--<logger name="com.petter.web" level="INFO" />-->
-
-    <!--<logger name="com.petter.mapper" level="DEBUG"/>-->
 
     <!-- 开发环境 + 测试环境. 多个使用逗号隔开. -->
     <springProfile name="dev,test">
