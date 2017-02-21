@@ -6,8 +6,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 
 import javax.servlet.MultipartConfigElement;
+import java.util.Locale;
 
 @SpringBootApplication
 //@ServletComponentScan
@@ -29,5 +32,24 @@ public class BootLearningApplication {
 		//Sets the directory location where files will be stored.
 		//factory.setLocation("路径地址");
 		return factory.createMultipartConfig();
+	}
+
+	//SessionLocaleResolver
+    //@Bean
+    //public LocaleResolver localeResolver() {
+     //   SessionLocaleResolver slr = new SessionLocaleResolver();
+     //   //设置默认区域
+     //   slr.setDefaultLocale(Locale.CHINA);
+     //   return slr;
+    //}
+
+	//CookieLocaleResolver
+	@Bean
+	public LocaleResolver localeResolver() {
+		CookieLocaleResolver slr = new CookieLocaleResolver();
+		//设置默认区域,
+		slr.setDefaultLocale(Locale.CHINA);
+		slr.setCookieMaxAge(3600);//设置cookie有效期.
+		return slr;
 	}
 }
