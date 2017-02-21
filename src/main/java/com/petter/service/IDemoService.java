@@ -23,4 +23,6 @@ public interface IDemoService {
     void test();
 
     List<Demo> likeName(String name);
+
+    Demo getByName(String name);
 }

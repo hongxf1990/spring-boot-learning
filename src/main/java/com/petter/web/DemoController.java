@@ -112,4 +112,9 @@ public class DemoController {
         task2.doTaskThree();
         return "task2";
     }
+
+    @RequestMapping(value = "/name")
+    public Demo getByName(String name) {
+        return demoService.getByName(name);
+    }
 }

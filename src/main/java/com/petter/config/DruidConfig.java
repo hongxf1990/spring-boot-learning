@@ -8,6 +8,9 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -19,6 +22,7 @@ import java.sql.SQLException;
  * @since 2017-02-12 11:34
  */
 @Configuration
+@EnableTransactionManagement //开启事务
 public class DruidConfig {
 
     @Resource
@@ -92,5 +96,10 @@ public class DruidConfig {
         }
 
         return druidDataSource;
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager() throws SQLException {
+        return new DataSourceTransactionManager(druidDataSource());
     }
 }

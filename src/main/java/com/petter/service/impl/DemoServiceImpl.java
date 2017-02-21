@@ -81,5 +81,10 @@ public class DemoServiceImpl implements IDemoService {
         return demoMapper.likeName("%" + name + "%");
     }
 
+    @Override
+    public Demo getByName(String name) {
+        return demoRepository.findByName(name);
+    }
+
 
 }
