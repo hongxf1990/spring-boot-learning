@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -35,6 +36,7 @@ public class DemoController {
      * 测试保存数据方法.
      * @return
      */
+    @ApiIgnore//使用该注解忽略这个API
     @RequestMapping("/save")
     public String save(){
         Demo d = new Demo();
