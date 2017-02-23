@@ -1,5 +1,7 @@
 package com.petter.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +17,8 @@ import java.io.Serializable;
 @Table(name = "demo")
 public class Demo implements Serializable {
 
+    //@JSONField(serialize = false)
+    @JsonIgnore
     @Id
     //@GenericGenerator(name = "test", strategy = "uuid")
     @GeneratedValue

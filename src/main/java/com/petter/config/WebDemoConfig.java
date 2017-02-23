@@ -75,4 +75,20 @@ public class WebDemoConfig extends WebMvcConfigurerAdapter {
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
         configurer.favorPathExtension(false);
     }
+
+    /**
+     * 配置使用fastjson取代jackson，看自己的使用习惯了
+     * @param converters
+     */
+    //@Override
+    //public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+    //    super.configureMessageConverters(converters);
+    //    //FastJsonHttpMessageConverter 用于Spring MVC4.2以下，FastJsonHttpMessageConverter4用于4.2以上
+    //    FastJsonHttpMessageConverter4 fastConverter = new FastJsonHttpMessageConverter4();
+    //    FastJsonConfig fastJsonConfig = new FastJsonConfig();
+    //    fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
+    //    fastConverter.setFastJsonConfig(fastJsonConfig);
+    //
+    //    converters.add(fastConverter);
+    //}
 }
