@@ -1,6 +1,9 @@
 package com.petter.mapper;
 
 import com.petter.entity.Demo;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -21,4 +24,8 @@ public interface DemoMapper {
 
     @Select("select name from demo where id = #{id}")
     String getNameById(String name);
+
+    @Insert("insert into Demo(name,password) values(#{name},#{password})")
+    @Options(useGeneratedKeys = true, keyColumn = "id")
+    long save(@Param("name") String name, @Param("password") String password);
 }
