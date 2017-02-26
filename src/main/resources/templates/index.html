@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
     <title>index</title>
+    <!--<script type="text/javascript" src="/webjars/jquery/3.1.1/jquery.min.js" ></script>-->
+    <script type="text/javascript" src="/webjarslocator/jquery/jquery.min.js"></script>
+    <script type="text/javascript" th:src="${urls.getForLookupPath('/js/demo.js')}"></script>
 </head>
 <body>
     <h3>index</h3>
+    <!--<script>
+        $(function(){
+            alert("ok");
+        });
+    </script>-->
 </body>
 </html>
