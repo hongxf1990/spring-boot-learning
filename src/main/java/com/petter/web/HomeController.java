@@ -1,5 +1,6 @@
 package com.petter.web;
 
+import com.petter.entity.UserInfo;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.springframework.stereotype.Controller;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 /**
@@ -17,7 +19,9 @@ import java.util.Map;
 public class HomeController {
 
     @RequestMapping(value = {"/","/index"}, method = RequestMethod.GET)
-    public String index(){
+    public String index(HttpSession session){
+        UserInfo user = (UserInfo) session.getAttribute("user");
+        System.out.println(user);
         return "index";
     }
 

@@ -4,6 +4,7 @@ import com.petter.entity.SysRole;
 import com.petter.entity.SysRolePermission;
 import com.petter.entity.UserInfo;
 import com.petter.service.IUserInfoService;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -66,6 +67,8 @@ public class ShiroRealm extends AuthorizingRealm {
                 ByteSource.Util.bytes(userInfo.getCredentialsSalt()),//salt=username+salt
                 getName()  //realm name
         );
+        //把用户信息放入session中
+        SecurityUtils.getSubject().getSession().setAttribute("user", userInfo);
 
         //明文: 若存在，将此用户存放到登录认证info中，无需自己做密码对比，Shiro会为我们进行密码对比校验
 //      SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
