@@ -26,6 +26,18 @@ public class BootLearningApplication {
         for (String beanName : beanNames) {
             System.out.println(beanName);
         }
+
+        //获取context.  -- Angel -守护天使
+        //ApplicationContext ctx =  (ApplicationContext) SpringApplication.run(BootLearningApplication.class, args);
+        //获取BeanFactory
+        //DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) ctx.getAutowireCapableBeanFactory();
+        //创建bean信息.
+        //BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(TestService.class);
+        //beanDefinitionBuilder.addPropertyValue("name","张三");
+        //动态注册bean.
+        //defaultListableBeanFactory.registerBeanDefinition("testService", beanDefinitionBuilder.getBeanDefinition());
+        //获取动态注册的bean.
+        //TestService testService =ctx.getBean(TestService.class);、testService.print();
     }
 
 	@Bean
