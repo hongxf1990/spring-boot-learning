@@ -5,6 +5,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
+ * 服务启动执行
  * @author Administrator
  * @since 2017-02-12 20:35
  */
