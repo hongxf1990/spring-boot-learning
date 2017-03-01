@@ -17,10 +17,6 @@ public class StatelessAuthenticationToken implements AuthenticationToken {
     private Map<String, ?> params; //参数
     private String clientDigest; //凭证即客户端传入的消息摘要。
 
-    public StatelessAuthenticationToken() {
-
-    }
-
     public StatelessAuthenticationToken(String username, Map<String, ?> params, String clientDigest) {
         this.username = username;
         this.params = params;

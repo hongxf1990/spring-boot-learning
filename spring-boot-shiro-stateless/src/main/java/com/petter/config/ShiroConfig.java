@@ -10,6 +10,9 @@ import org.apache.shiro.web.mgt.DefaultWebSubjectFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 /**
  * 第一：SubjectContext在创建的时候，需要关闭session的创建，这个主要是由DefaultWebSubjectFactory的createSubject进行管理。
  * 第二：需要禁用使用Sessions 作为存储策略的实现，这个主要由securityManager的subjectDao的sessionStorageEvaluator进行管理的。
@@ -19,30 +22,6 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class ShiroConfig {
-
-    @Bean
-    public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
-        ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
-        shiroFilterFactoryBean.setSecurityManager(securityManager);
-        return shiroFilterFactoryBean;
-    }
-
-    @Bean
-    public SecurityManager securityManager() {
-        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        //Add.2.2
-        securityManager.setSubjectFactory(subjectFactory());
-         /*
-         * 禁用使用Sessions 作为存储策略的实现，但它没有完全地禁用Sessions
-         * 所以需要配合context.setSessionCreationEnabled(false);
-         */
-        //Add.2.3
-        ((DefaultSessionStorageEvaluator)((DefaultSubjectDAO)securityManager.getSubjectDAO()).getSessionStorageEvaluator()).setSessionStorageEnabled(false);
-
-        //Add.2.5
-        securityManager.setSessionManager(sessionManager());
-        return securityManager;
-    }
 
     /**
      * Add.2.1
@@ -66,5 +45,58 @@ public class ShiroConfig {
         DefaultSessionManager sessionManager = new DefaultSessionManager();
         sessionManager.setSessionValidationSchedulerEnabled(false);
         return sessionManager;
+    }
+
+    /**
+     * Add.4.3
+     * 自己定义的realm.
+     * @return
+     */
+    @Bean
+    public StatelessAuthorizingRealm statelessRealm(){
+        return new StatelessAuthorizingRealm();
+    }
+
+    /**
+     * Add.4.1
+     * 访问控制器.
+     * @return
+     */
+    @Bean
+    public StatelessAuthcFilter statelessAuthFilter(){
+        return new StatelessAuthcFilter();
+    }
+
+    @Bean
+    public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
+        ShiroFilterFactoryBean factoryBean = new ShiroFilterFactoryBean();
+        factoryBean.setSecurityManager(securityManager);
+        //Add.4.2
+        factoryBean.getFilters().put("statelessAuthc", statelessAuthFilter());
+        //拦截器.
+        Map<String,String> filterChainDefinitionMap = new LinkedHashMap<>();
+        filterChainDefinitionMap.put("/**", "statelessAuthc");
+        factoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+        return factoryBean;
+    }
+
+    @Bean
+    public SecurityManager securityManager() {
+        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+        //Add.2.2
+        securityManager.setSubjectFactory(subjectFactory());
+        //Add.2.5
+        securityManager.setSessionManager(sessionManager());
+
+        //Add.4.4
+        securityManager.setRealm(statelessRealm());
+         /*
+         * 禁用使用Sessions 作为存储策略的实现，但它没有完全地禁用Sessions
+         * 所以需要配合context.setSessionCreationEnabled(false);
+         */
+        //Add.2.3
+        ((DefaultSessionStorageEvaluator)((DefaultSubjectDAO)securityManager.getSubjectDAO()).getSessionStorageEvaluator()).setSessionStorageEnabled(false);
+
+        return securityManager;
     }
 }

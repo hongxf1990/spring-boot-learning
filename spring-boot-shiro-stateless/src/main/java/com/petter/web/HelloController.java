@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
 
     @RequestMapping("/hello")
-    public String hello(String param1, String param2) {
-        return "hello, Andy, param1=" + param1 + ", param2=" + param2;
+    public String hello(String params1, String params2) {
+        return "hello, hongxf, params1=" + params1 + ", params2=" + params2;
     }
 
     /**
