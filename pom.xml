@@ -28,6 +28,13 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+            <!-- 如果使用undertow需要从依赖信息里移除 Tomcat配置 -->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
 		</dependency>
 
 		<dependency>
@@ -151,6 +158,11 @@
             <groupId>org.webjars</groupId>
             <artifactId>webjars-locator</artifactId>
         </dependency>
+		<!-- undertow 高性能非阻塞web服务器，比tomcat性能好些-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-undertow</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
