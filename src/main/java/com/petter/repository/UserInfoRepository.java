@@ -1,13 +1,13 @@
 package com.petter.repository;
 
 import com.petter.entity.UserInfo;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * @author hongxf
  * @since 2017-02-17 13:37
  */
-public interface UserInfoRepository extends CrudRepository<UserInfo, Long> {
+public interface UserInfoRepository extends JpaRepository<UserInfo, Long> {
 
     /**
      * 通过username查找用户信息
