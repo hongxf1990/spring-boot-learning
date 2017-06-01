@@ -2,11 +2,9 @@ package com.petter.scheduling;
 
 import org.springframework.scheduling.Trigger;
 import org.springframework.scheduling.TriggerContext;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 import org.springframework.scheduling.support.CronTrigger;
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
@@ -15,8 +13,8 @@ import java.util.Date;
  * @author hongxf
  * @since 2017-06-01 13:52
  */
-@Component
-@EnableScheduling
+//@Component
+//@EnableScheduling
 public class TaskCronChange implements SchedulingConfigurer {
 
     private static String cron;
