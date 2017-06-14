@@ -1,6 +1,8 @@
 package com.petter.runner;
 
+import com.petter.util.SpringUtil;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.ApplicationContext;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +17,10 @@ import org.springframework.stereotype.Component;
 public class StartupRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
+        ApplicationContext applicationContext = SpringUtil.getApplicationContext();
+        if (applicationContext == null) {
+            System.out.println("applicationContext is null");
+        }
         System.out.println(">>>>>>>>>>>>>>>服务启动执行11111，执行加载数据等操作<<<<<<<<<<<<<");
     }
 }
