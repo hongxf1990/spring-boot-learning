@@ -8,6 +8,7 @@ import javax.servlet.ServletContextListener;
 
 /**
  * Web应用启动时，注册已经确定的定时任务
+ * 一些动态的、未确定触发时间的定时任务，后续可通过静态的Scheduler注册。
  * @author hongxf
  * @since 2017-06-19 15:27
  */
