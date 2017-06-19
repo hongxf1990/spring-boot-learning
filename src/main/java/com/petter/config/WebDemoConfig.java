@@ -1,8 +1,10 @@
 package com.petter.config;
 
+import com.petter.scheduling.quartz.ApplicationContextListener;
 import com.petter.servlet.ValidateCodeServlet;
 import org.glassfish.jersey.servlet.ServletContainer;
 import org.glassfish.jersey.servlet.ServletProperties;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,6 +46,11 @@ public class WebDemoConfig extends WebMvcConfigurerAdapter {
     @Bean
     public ServletRegistrationBean validateCodeServlet() {
         return new ServletRegistrationBean(new ValidateCodeServlet(), "/validateCodeServlet");
+    }
+
+    @Bean
+    public ServletListenerRegistrationBean applicationContextListener() {
+        return new ServletListenerRegistrationBean(new ApplicationContextListener());
     }
 
     @Bean
