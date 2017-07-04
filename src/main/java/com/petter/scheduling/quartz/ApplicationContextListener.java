@@ -12,7 +12,7 @@ import javax.servlet.ServletContextListener;
  * @author hongxf
  * @since 2017-06-19 15:27
  */
-//@WebListener 这里配置这个没有用需要使用ServletListenerRegistrationBean进行注册
+//@WebListener 这里配置这个没有用，是因为没有打开@ServletComponentScan注解，也可以使用ServletListenerRegistrationBean进行注册
 public class ApplicationContextListener implements ServletContextListener {
 
     private Scheduler scheduler;

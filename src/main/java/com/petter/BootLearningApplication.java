@@ -15,7 +15,7 @@ import javax.servlet.MultipartConfigElement;
 import java.util.Locale;
 
 @SpringBootApplication
-//@ServletComponentScan
+//@ServletComponentScan  //用于@WebServlet @WebListener @WebFilter注解时候放开才能进行注册
 @EnableAsync
 @MapperScan(value = "com.petter.mapper") //扫描mybatis的接口
 public class BootLearningApplication {
