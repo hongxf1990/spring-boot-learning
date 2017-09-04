@@ -28,13 +28,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-            <!-- 如果使用undertow需要从依赖信息里移除 Tomcat配置 -->
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-            </exclusions>
 		</dependency>
 
 		<dependency>
@@ -163,6 +156,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-undertow</artifactId>
 		</dependency>
+        <!-- 如果使用jar启动则要注释掉scope，打成war时候放开 -->
+        <!--<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>-->
 		<!-- quartz -->
 		<dependency>
 			<groupId>org.quartz-scheduler</groupId>

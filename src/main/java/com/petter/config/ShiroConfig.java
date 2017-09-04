@@ -20,7 +20,7 @@ import java.util.Map;
  * Shiro 配置
  * Apache Shiro 核心通过 Filter 来实现，就好像SpringMvc 通过DispachServlet 来主控制一样。
  * 既然是使用 Filter 一般也就能猜到，是通过URL规则来进行过滤和权限校验，所以我们需要定义一系列关于URL的规则和访问权限。
- * 注入第一就是ShiroFilterFactory,第二就是SecurityManager
+ * 注入第一就是ShiroFilterFactoryBean,第二就是SecurityManager
  * @author hongxf
  * @since 2017-02-17 11:03
  */
